@@ -4,20 +4,21 @@ import 'package:flutester/model/energy_info.dart';
 import 'package:flutester/service/inverter.dart';
 import 'package:flutter/material.dart';
 
-const inverterIp = '192.168.0.31';
-
 final greenish = Colors.green.shade100;
 final redish = Colors.red.shade100;
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage(this._inverter, {Key? key}) : super(key: key);
+
+  final Inverter _inverter;
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final Inverter _inverter = Inverter(inverterIp);
+
+  late Inverter _inverter = widget._inverter;
 
   @override
   void initState() {
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       return Scaffold(
         body: Center(
           child: StreamBuilder<EnergyInfo>(
-              stream: Stream.periodic(Duration(seconds: 1))
+              stream:  Stream.periodic(Duration(seconds: 1))
                   .asyncMap((event) => _inverter.fetchEnergyInfo()),
               builder: (context, snapshot) {
                 final pv = snapshot.data?.pvOutput ?? 0;

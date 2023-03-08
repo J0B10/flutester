@@ -1,5 +1,6 @@
 
 
+import 'package:flutester/service/inverter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,7 @@ class App extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
         ),
-        home: HomePage(),
+        home: HomePage(Inverter('192.168.0.31')),
       ),
     );
   }
