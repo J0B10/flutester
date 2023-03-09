@@ -24,7 +24,7 @@ class App extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
         ),
-        home: HomePage(Inverter('192.168.0.31')),
+        home: HomePage(Inverter('192.168.0.31'), const Duration(seconds: 1)),
       ),
     );
   }
