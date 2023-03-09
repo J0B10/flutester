@@ -23,7 +23,6 @@ jobs:
 
   test:
     name: 'Unit tests'
-    if: '${{false}}'                   # disabled for now
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
