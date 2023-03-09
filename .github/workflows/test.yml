@@ -1,0 +1,35 @@
+name: 'Test'
+on: [ push, pull_request, workflow_dispatch ]
+env:
+  FLUTTER_TARGET_VER: '3.7.x'
+jobs:
+  lint:
+    name: 'Static code analysis'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '${{env.FLUTTER_TARGET_VER}}'
+        channel: 'stable'
+        cache: true
+    - run: flutter --version
+    - run: flutter pub get
+    - uses: invertase/github-action-dart-analyzer@v1
+      with:
+        fatal-infos: false
+        fatal-warnings: true
+
+  test:
+    name: 'Unit tests'    
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '${{env.FLUTTER_TARGET_VER}}'
+        channel: 'stable'
+        cache: true
+    - run: flutter --version
+    - run: flutter pub get
+    - run: flutter test
