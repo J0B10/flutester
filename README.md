@@ -1,6 +1,6 @@
 # flutester
 
-A new Flutter project.
+Just me playing around to learn flutter.
 
 ## Getting Started
 
