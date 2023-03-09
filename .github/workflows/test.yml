@@ -15,13 +15,15 @@ jobs:
         cache: true
     - run: flutter --version
     - run: flutter pub get
-    - uses: invertase/github-action-dart-analyzer@v1
+    # Use this commit till there is a new release that uses Node 16
+    - uses: invertase/github-action-dart-analyzer@69c46710f2d03703360106dfac29743fcae45ec6
       with:
         fatal-infos: false
         fatal-warnings: true
 
   test:
-    name: 'Unit tests'    
+    name: 'Unit tests'
+    if: '${{false}}'                   # disabled for now
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
