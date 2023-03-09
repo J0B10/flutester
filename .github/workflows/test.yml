@@ -16,7 +16,7 @@ jobs:
     - run: flutter --version
     - run: flutter pub get
     # Use this commit till there is a new release that uses Node 16
-    - uses: invertase/github-action-dart-analyzer@69c46710f2d03703360106dfac29743fcae45ec6
+    - uses: invertase/github-action-dart-analyzer@1cda5922c6369263b1c7e2fbe281f69704f4d63e
       with:
         fatal-infos: false
         fatal-warnings: true
