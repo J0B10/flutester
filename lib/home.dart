@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  late Inverter _inverter = widget._inverter;
+  late final Inverter _inverter = widget._inverter;
 
   @override
   void initState() {
@@ -33,25 +33,26 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
+  Widget build(final BuildContext context) {
+    return LayoutBuilder(builder: (final context, final constraints) {
       return Scaffold(
         body: Center(
           child: StreamBuilder<EnergyInfo>(
-              stream:  Stream.periodic(Duration(seconds: 1))
+              stream:  Stream.periodic(const Duration(seconds: 1))
                   .asyncMap((event) => _inverter.fetchEnergyInfo()),
               builder: (context, snapshot) {
                 final pv = snapshot.data?.pvOutput ?? 0;
                 final home = snapshot.data?.homeConsumption ?? 0;
                 final grid = snapshot.data?.gridFeed ?? 0;
-                print('pv=${pv}kW home=${home}kW grid=${grid}kW');
+                debugPrint('pv=${pv}kW home=${home}kW grid=${grid}kW');
                 
-                Color? _getColor(double val) {
+                Color? getColor(double val) {
                   if (val > 0) {
                     return greenish;
                   } else if (val < 0) {
                     return redish;
                   }
+                  return null;
                 }
                 
                 return Row(
@@ -62,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                       label: 'PV-\nErzeugung',
                       icon: Icons.sunny,
                       value: pv,
-                      cardColor: _getColor(pv),
+                      cardColor: getColor(pv),
                     ),
                     EnergyFlow(FlowDirection.of(pv)),
                     EnergyDisplay(
@@ -76,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                       label: grid >= 0 ? 'Netz-\neinspeisung' : 'Netzbezug',
                       icon: Icons.bolt_sharp,
                       value: grid,
-                      cardColor: _getColor(grid),
+                      cardColor: getColor(grid),
                     ),
                   ],
                 );

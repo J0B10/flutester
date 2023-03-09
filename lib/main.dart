@@ -8,7 +8,7 @@ import 'app_state.dart';
 import 'home.dart';
 
 void main() {
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatelessWidget {

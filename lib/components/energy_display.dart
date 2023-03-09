@@ -47,7 +47,7 @@ class EnergyDisplay extends StatelessWidget {
                 color: color,
                 size: 72,
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 '$label\n',
                 maxLines: 2,

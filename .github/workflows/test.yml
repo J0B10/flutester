@@ -18,7 +18,7 @@ jobs:
     # Use this commit till there is a new release that uses Node 16
     - uses: invertase/github-action-dart-analyzer@1cda5922c6369263b1c7e2fbe281f69704f4d63e
       with:
-        fatal-infos: false
+        fatal-infos: true
         fatal-warnings: true
 
   test:
