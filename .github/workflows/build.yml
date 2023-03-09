@@ -1,5 +1,5 @@
 name: 'Build'
-on: [ push, pull_request, workflow_dispatch ]
+on: [ release, workflow_dispatch ]
 jobs:
   ios:
     name: 'Build iOS app'
@@ -13,9 +13,8 @@ jobs:
         architecture: x64
     - run: flutter --version
     - run: flutter pub get
-  # - run: flutter test
+    - run: flutter test
     - run: flutter build ios --release --no-codesign
-    - run: ls -r build/ios
     - uses: actions/upload-artifact@v2
       with:
         name: ios-release
@@ -38,7 +37,7 @@ jobs:
         cache: true
     - run: flutter --version
     - run: flutter pub get
-  # - run: flutter test
+    - run: flutter test
     - run: flutter build apk     
     - uses: actions/upload-artifact@v2
       with:
