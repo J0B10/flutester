@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class EnergyDisplay extends StatelessWidget {
   const EnergyDisplay({
-    Key? key,
     required this.label,
     required this.icon,
     required this.value,
     this.cardColor,
     this.width = 96,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String label;
   final IconData icon;
@@ -28,10 +28,10 @@ class EnergyDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final color = _textColor(theme);
-    final valueStyle = theme.textTheme.displaySmall!.copyWith(color: color);
-    final textStyle = theme.textTheme.bodyMedium!.copyWith(color: color);
+    var theme = Theme.of(context);
+    var color = _textColor(theme);
+    var valueStyle = theme.textTheme.displaySmall!.copyWith(color: color);
+    var textStyle = theme.textTheme.bodyMedium!.copyWith(color: color);
 
     return Card(
       color: cardColor,

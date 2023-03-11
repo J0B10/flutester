@@ -19,17 +19,16 @@ class InverterMock implements Inverter {
   final EnergyInfo info;
 
   @override
+  Future<EnergyInfo> fetchEnergyInfo() async => info;
+
+  @override
   void close() {}
 
   @override
   void connect() {}
-
-  @override
-  Future<EnergyInfo> fetchEnergyInfo() async => info;
 }
 
 void main() {
-
   testWidgets('Test home setup', (tester) async {
     var expected = const EnergyInfo(0, 0, 0);
     var duration = const Duration(milliseconds: 5);

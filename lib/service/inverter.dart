@@ -1,9 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:flutester/model/energy_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:modbus/modbus.dart' as modbus;
-
-import '../model/energy_info.dart';
 
 class Inverter {
   Inverter(String ip, {int? port, int? unitID})
@@ -14,11 +13,13 @@ class Inverter {
           mode: modbus.ModbusMode.rtu,
         );
 
+  @visibleForTesting
+  Inverter.test(this._client);
+
   final modbus.ModbusClient _client;
 
-  void connect() {
-    _client.connect();
-  }
+  // ignore: discarded_futures
+  void connect() => _client.connect();
 
   @visibleForTesting
   static int readUint32(Uint16List list, int pos) {
@@ -31,13 +32,13 @@ class Inverter {
   }
 
   Future<EnergyInfo> fetchEnergyInfo() async {
-    final gridData = await _client.readHoldingRegisters(30865, 4);
-    final gridWIn = readUint32(gridData, 0);
-    final gridWOut = readUint32(gridData, 2);
-    final pvData = await _client.readHoldingRegisters(30775, 2);
-    final pvOutput = readUint32(pvData, 0);
-    final gridFeed = gridWOut > 0 ? gridWOut : -gridWIn;
-    final homeConsumption = pvOutput - gridFeed;
+    var gridData = await _client.readHoldingRegisters(30865, 4);
+    var gridWIn = readUint32(gridData, 0);
+    var gridWOut = readUint32(gridData, 2);
+    var pvData = await _client.readHoldingRegisters(30775, 2);
+    var pvOutput = readUint32(pvData, 0);
+    var gridFeed = gridWOut > 0 ? gridWOut : -gridWIn;
+    var homeConsumption = pvOutput - gridFeed;
     return EnergyInfo(
       pvOutput / 1000.0,
       homeConsumption / 1000.0,
@@ -45,7 +46,6 @@ class Inverter {
     );
   }
 
-  void close() {
-    _client.close();
-  }
+  // ignore: discarded_futures
+  void close() => _client.close();
 }

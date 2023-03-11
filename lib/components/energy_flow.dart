@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 enum FlowDirection {
-  left, right, none;
+  left,
+  right,
+  none;
 
   FlowDirection invert() {
     switch (this) {
@@ -26,10 +28,11 @@ enum FlowDirection {
 }
 
 class EnergyFlow extends StatelessWidget {
-  const EnergyFlow(this.flow, {
-    Key? key,
+  const EnergyFlow(
+    this.flow, {
     this.spacing = 32.0,
-  }) : super(key: key);
+    super.key,
+  });
 
   final FlowDirection flow;
   final double spacing;
@@ -46,12 +49,10 @@ class EnergyFlow extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: spacing,
-      child: Center(
-        child: Icon(_getFlowIcon()),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => SizedBox(
+        width: spacing,
+        child: Center(
+          child: Icon(_getFlowIcon()),
+        ),
+      );
 }
