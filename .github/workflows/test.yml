@@ -1,5 +1,10 @@
 name: 'Test'
-on: [ push, pull_request, workflow_dispatch ]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
 env:
   FLUTTER_TARGET_VER: '3.7.x'
 jobs:
