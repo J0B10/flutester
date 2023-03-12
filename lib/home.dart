@@ -95,7 +95,8 @@ class _HomePageState extends State<HomePage> {
                       cardColor: getColor(pv),
                     ),
                     EnergyFlow(
-                      FlowDirection.of(pv),
+                      flow: FlowDirection.of(pv),
+                      color: Colors.orangeAccent.shade200.withOpacity(0.7),
                       key: keyFlowPV,
                       spacing: constraints.energyFlowSpacing,
                     ),
@@ -109,7 +110,8 @@ class _HomePageState extends State<HomePage> {
                       //cardColor: _getColor(home),
                     ),
                     EnergyFlow(
-                      FlowDirection.of(grid),
+                      flow: FlowDirection.of(grid),
+                      color: Colors.orangeAccent.shade200.withOpacity(0.7),
                       key: keyFlowGrid,
                       spacing: constraints.energyFlowSpacing,
                     ),
