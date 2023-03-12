@@ -7,4 +7,9 @@ class EnergyInfo {
   final double pvOutput;
   final double homeConsumption;
   final double gridFeed;
+
+  @override
+  String toString() => 'pv=${pvOutput}kW'
+      ' home=${homeConsumption}kW'
+      ' grid=${gridFeed}kW';
 }

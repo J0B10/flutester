@@ -30,7 +30,7 @@ enum FlowDirection {
 class EnergyFlow extends StatelessWidget {
   const EnergyFlow(
     this.flow, {
-    this.spacing = 32.0,
+    this.spacing = 32,
     super.key,
   });
 
