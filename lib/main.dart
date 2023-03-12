@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutester/app_state.dart';
-import 'package:flutester/home.dart';
+import 'package:flutester/pages/home/home.dart';
 import 'package:flutester/service/inverter_simulator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +22,7 @@ class App extends StatelessWidget {
             useMaterial3: true,
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
           ),
-          home: HomePage(InverterSimulator(Random()), const Duration(seconds: 1)),
+          home: HomePage(InverterSimulator(Random())),
         ),
       );
 }

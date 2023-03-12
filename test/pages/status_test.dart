@@ -7,9 +7,9 @@
 
 import 'package:flutester/components/energy_display.dart';
 import 'package:flutester/components/energy_flow.dart';
-import 'package:flutester/home.dart';
 import 'package:flutester/model/energy_info.dart';
 import 'package:flutester/model/flow_direction.dart';
+import 'package:flutester/pages/home/status.dart';
 import 'package:flutester/service/inverter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -30,12 +30,12 @@ class InverterMock implements Inverter {
 }
 
 void main() {
-  testWidgets('Test home setup', (tester) async {
+  testWidgets('Test status setup', (tester) async {
     var expected = const EnergyInfo(0, 0, 0);
     var duration = const Duration(milliseconds: 5);
 
     await tester.pumpWidget(MaterialApp(
-      home: HomePage(InverterMock(expected), duration),
+      home: Status(InverterMock(expected), duration),
     ));
 
     var pv = tester.widget<EnergyDisplay>(find.byKey(keyDisplayPV));
@@ -56,12 +56,12 @@ void main() {
     expect(gridFlow.flow, FlowDirection.none);
   });
 
-  testWidgets('Test home display negative balance', (tester) async {
+  testWidgets('Test status display negative balance', (tester) async {
     var expected = const EnergyInfo(3.4, 4.69, -1.29);
     var duration = const Duration(milliseconds: 5);
 
     await tester.pumpWidget(MaterialApp(
-      home: HomePage(InverterMock(expected), duration),
+      home: Status(InverterMock(expected), duration),
     ));
     await tester.pump(duration);
 
@@ -77,12 +77,12 @@ void main() {
     expect(find.textContaining('Netzbezug'), findsOneWidget);
   });
 
-  testWidgets('Test home display positive balance', (tester) async {
+  testWidgets('Test status display positive balance', (tester) async {
     var expected = const EnergyInfo(1.0, 2.71, 1.71);
     var duration = const Duration(milliseconds: 5);
 
     await tester.pumpWidget(MaterialApp(
-      home: HomePage(InverterMock(expected), duration),
+      home: Status(InverterMock(expected), duration),
     ));
     await tester.pump(duration);
 
@@ -98,12 +98,12 @@ void main() {
     expect(find.textContaining('Netz-\neinspeisung'), findsOneWidget);
   });
 
-  testWidgets('Test home flow positive balance', (tester) async {
+  testWidgets('Test status flow positive balance', (tester) async {
     var expected = const EnergyInfo(1.0, 2.71, 1.71);
     var duration = const Duration(milliseconds: 5);
 
     await tester.pumpWidget(MaterialApp(
-      home: HomePage(InverterMock(expected), duration),
+      home: Status(InverterMock(expected), duration),
     ));
     await tester.pump(duration);
 
@@ -113,12 +113,12 @@ void main() {
     expect(grid.flow, FlowDirection.right);
   });
 
-  testWidgets('Test home flow negative balance', (tester) async {
+  testWidgets('Test status flow negative balance', (tester) async {
     var expected = const EnergyInfo(3.4, 4.69, -1.29);
     var duration = const Duration(milliseconds: 5);
 
     await tester.pumpWidget(MaterialApp(
-      home: HomePage(InverterMock(expected), duration),
+      home: Status(InverterMock(expected), duration),
     ));
     await tester.pump(duration);
 
@@ -128,12 +128,12 @@ void main() {
     expect(grid.flow, FlowDirection.left);
   });
 
-  testWidgets('Test home no flow', (tester) async {
+  testWidgets('Test status no flow', (tester) async {
     var expected = const EnergyInfo(0, 0, 0);
     var duration = const Duration(milliseconds: 5);
 
     await tester.pumpWidget(MaterialApp(
-      home: HomePage(InverterMock(expected), duration),
+      home: Status(InverterMock(expected), duration),
     ));
     await tester.pump(duration);
 
