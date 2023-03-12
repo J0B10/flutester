@@ -68,7 +68,7 @@ jobs:
         path: build/app/outputs/apk/release/app-release.apk
     
   web:
-    name: 'Build & deploy web app'
+    name: 'Build web app'
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -85,8 +85,22 @@ jobs:
           cache: true
       - run: flutter --version
       - run: flutter pub get
-      - run: flutter build web --release
-      - uses: peaceiris/actions-gh-pages@v3
+      - run: flutter build web --release  --base-href='/flutester/'
+      - uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/web
+          path: build/web/
+
+  web_deploy:
+    name: 'Deploy web app'
+    needs: web
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v1
+
