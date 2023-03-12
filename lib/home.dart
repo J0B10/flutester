@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutester/components/energy_display.dart';
 import 'package:flutester/components/energy_flow.dart';
 import 'package:flutester/model/energy_info.dart';
+import 'package:flutester/model/flow_direction.dart';
 import 'package:flutester/service/inverter.dart';
 import 'package:flutter/material.dart';
 
