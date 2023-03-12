@@ -85,7 +85,7 @@ jobs:
           cache: true
       - run: flutter --version
       - run: flutter pub get
-      - run: flutter build web --release  --base-href='/flutester/'
+      - run: 'flutter build web --release --base-href=''/flutester/'''
       - uses: actions/upload-pages-artifact@v1
         with:
           path: build/web/
