@@ -44,8 +44,8 @@ class _EnergyFlowState extends State<EnergyFlow>
 
   @override
   void dispose() {
-    super.dispose();
     _animationController.dispose();
+    super.dispose();
   }
 
   Animation<double>? get animation {
